@@ -28,10 +28,6 @@ export default async function Home() {
   }
   // console.log('table', table);
 
-  // ? get data from TickTok
-  // const tickTok = await getTickTok('mentoring.europe');
-  // const htmlData = tickTok.html;
-
   return (
     <main>
       <Image src={table.Global[0].Logo} alt="logo" width="300" height="200" />
