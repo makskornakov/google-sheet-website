@@ -38,11 +38,19 @@ export default async function Home() {
       <h1>{table.Global[0].Title}</h1>
       <p>{table.Global[0].Description}</p>
 
-      {table.Links.map((link) => (
-        <Link key={link.Title} href={link.Link} target="_blank">
-          {link.Title}
-        </Link>
-      ))}
+      {table.Links.map(async (link) => {
+        if (link.Type === 'TickTok') {
+          const tickTok = await getTickTok(link.Link);
+          const htmlData = tickTok.html;
+          return <div key={link.Title} dangerouslySetInnerHTML={{ __html: htmlData }} />;
+        } else {
+          return (
+            <Link href={link.Link} key={link.Title}>
+              {link.Title}
+            </Link>
+          );
+        }
+      })}
     </main>
   );
 }
