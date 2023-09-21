@@ -30,9 +30,11 @@ export const globals = css`
       ${reset.a}
     }
     main {
+      min-height: 100vh;
       padding: 1rem;
       display: flex;
       flex-direction: column;
+      row-gap: 1rem;
       align-items: center;
     }
   }
