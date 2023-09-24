@@ -15,9 +15,9 @@ import { FaSnapchat } from 'react-icons/fa6';
 // import { BsTiktok } from 'react-icons/bs';
 import { MailLink, StyledSocialLink } from './page.styled';
 import TickTokButton from './Tiktok';
-import Script from 'next/script';
 
-const sheetId = '1txP-Pc-fekunT0OkkmLtotDw6oYuhG2hciboXGxV3_k';
+// get from env
+const sheetId = process.env.GOOGLE_SHEET_ID as string;
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const data = await getTableData(sheetId);
