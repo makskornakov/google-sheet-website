@@ -24,7 +24,7 @@ export const globals = css`
       padding: 1rem;
       display: flex;
       flex-direction: column;
-      row-gap: 1rem;
+      row-gap: 0.5rem;
       align-items: center;
     }
   }

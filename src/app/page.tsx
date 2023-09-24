@@ -65,12 +65,16 @@ export default async function Home() {
       </h1>
       <p
         style={{
+          textAlign: 'center',
           fontFamily: table.Fonts[0]['Body name'],
+          whiteSpace: 'pre-line',
+        }}
+        dangerouslySetInnerHTML={{
+          __html: table.Global[0].Description,
         }}
       >
-        {table.Global[0].Description}
+        {/* {table.Global[0].Description} */}
       </p>
-
       <MailLink
         href={`mailto:${table.Global[0].Email}`}
         key={table.Global[0].Email}
@@ -87,6 +91,7 @@ export default async function Home() {
           alignItems: 'center',
           rowGap: '1rem',
           marginBottom: '5rem',
+          marginTop: '1rem',
         }}
       >
         {table.Links.map(async (link) => {
