@@ -1,7 +1,8 @@
 import { styled } from '@linaria/react';
 
 export const TikTokWrapper = styled.div`
-  iframe {
+  blockquote {
     border-radius: 1rem;
+    transform: scale(1.05);
   }
 `;
