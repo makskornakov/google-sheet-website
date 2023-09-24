@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { styled } from '@linaria/react';
+import { css } from '@linaria/core';
 
 export const StyledSocialLink = styled(Link)<{ accentcolor: string }>`
   background: #fff;
@@ -17,10 +18,27 @@ export const StyledSocialLink = styled(Link)<{ accentcolor: string }>`
   svg {
     position: absolute;
     left: 1rem;
+    transition-duration: inherit;
   }
 
   &:hover {
     transform: scale(1.02);
     box-shadow: 0 0 0.6rem ${(props) => props.accentcolor + '4D'};
+
+    svg {
+      color: ${(props) => props.accentcolor};
+    }
+  }
+`;
+
+export const MailLink = styled(Link)<{ accentcolor: string }>`
+  svg {
+    transition-duration: 0.2s;
+  }
+
+  &:hover {
+    svg {
+      color: ${(props) => props.accentcolor};
+    }
   }
 `;

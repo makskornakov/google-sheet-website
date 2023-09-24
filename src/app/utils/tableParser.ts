@@ -1,12 +1,4 @@
-import type {
-  ColorSheet,
-  FontSheet,
-  GlobalSheet,
-  LayoutSheet,
-  SocialLink,
-  SocialSheet,
-  SomeKey,
-} from '../types';
+import type { AllSheet, SocialSheet, SomeKey } from '../types';
 
 export default function splitTableData(data: string): SocialSheet {
   const columns = data.split('\r\n').map((row) => row.split('\t').filter((col) => col));
@@ -28,7 +20,7 @@ export default function splitTableData(data: string): SocialSheet {
 
       i++;
     } else {
-      const rowObject = {} as GlobalSheet & SocialLink & LayoutSheet & ColorSheet & FontSheet;
+      const rowObject = {} as AllSheet;
       for (let j = 0; j < row.length; j++) {
         rowObject[currentHeadings[j]] = row[j];
       }

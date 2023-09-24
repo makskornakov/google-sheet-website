@@ -4,11 +4,6 @@ import { reset } from './utils/reset';
 
 export const globals = css`
   :global() {
-    :root {
-      --text-rgb: 0, 0, 0;
-      --background-rgb: 255, 255, 255;
-    }
-
     * {
       box-sizing: border-box;
       padding: 0;
@@ -19,11 +14,6 @@ export const globals = css`
     body {
       max-width: 100vw;
       overflow-x: hidden;
-    }
-
-    body {
-      color: rgb(var(--text-rgb));
-      background: rgb(var(--background-rgb));
     }
 
     a {

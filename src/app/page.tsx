@@ -11,8 +11,11 @@ import {
   AiOutlineYoutube,
   AiOutlineGlobal,
 } from 'react-icons/ai';
-import { BsTiktok } from 'react-icons/bs';
-import { StyledSocialLink } from './page.styled';
+import { FaSnapchat } from 'react-icons/fa6';
+// import { BsTiktok } from 'react-icons/bs';
+import { MailLink, StyledSocialLink } from './page.styled';
+import TickTokButton from './Tiktok';
+import Script from 'next/script';
 
 const sheetId = '1txP-Pc-fekunT0OkkmLtotDw6oYuhG2hciboXGxV3_k';
 
@@ -42,17 +45,15 @@ export default async function Home() {
   return (
     <main
       style={{
-        backgroundColor: table.Colors[0]['Background'],
         color: table.Colors[0]['Main color'],
+        alignItems: table.Layout[0]['Global alignment'],
+        background: table.Colors[0]['Background'],
       }}
     >
-      <style>
-        {`
-          @import url(${table.Fonts[0]['Heading url']});
-          @import url(${table.Fonts[0]['Body url']});
-        `}
-      </style>
-      <Image src={table.Global[0].Logo} alt="logo" width="300" height="200" />
+      <link rel="stylesheet" href={table.Fonts[0]['Heading url']} />
+      <link rel="stylesheet" href={table.Fonts[0]['Body url']} />
+
+      <Image src={table.Global[0].Logo} alt="logo" width="200" height="150" />
       <h1
         style={{
           fontSize: '3rem',
@@ -70,39 +71,76 @@ export default async function Home() {
         {table.Global[0].Description}
       </p>
 
-      {/* <a target="_blank" rel="noopener" data-testid="SocialIcon" href="mailto:Info@Mentoringeurope.eu" aria-label="@Mentoring_Europe email address" class="sc-eCssSg lbrsth sc-kstrdz btjemE"><svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" class="sc-gKsewC fwXqBO"><title data-testid="svgTitle" id="title_0.7153391068046636">email</title><path d="M18.821,20.5H5.179A3.683,3.683,0,0,1,1.5,16.821V7.179A3.683,3.683,0,0,1,5.179,3.5H18.821A3.683,3.683,0,0,1,22.5,7.179v9.642A3.683,3.683,0,0,1,18.821,20.5ZM5.179,4.5A2.682,2.682,0,0,0,2.5,7.179v9.642A2.682,2.682,0,0,0,5.179,19.5H18.821A2.682,2.682,0,0,0,21.5,16.821V7.179A2.682,2.682,0,0,0,18.821,4.5Z"></path><path d="M12,14.209a.5.5,0,0,1-.346-.138L4.286,7.028a.5.5,0,0,1,.691-.723L12,13.018l7.023-6.713a.5.5,0,1,1,.691.723l-7.368,7.043A.5.5,0,0,1,12,14.209Z"></path><path d="M4.7,17.833a.5.5,0,0,1-.347-.86l5.54-5.31a.5.5,0,0,1,.692.722L5.048,17.694A.5.5,0,0,1,4.7,17.833Z"></path><path d="M19.3,17.832a.5.5,0,0,1-.346-.139l-5.538-5.308a.5.5,0,0,1,.692-.722l5.538,5.308a.5.5,0,0,1-.346.861Z"></path></svg></a> */}
-      {/* link to email */}
-      <Link
+      <MailLink
         href={`mailto:${table.Global[0].Email}`}
         key={table.Global[0].Email}
         rel="noopener"
         target="_blank"
+        accentcolor={table.Colors[0]['Accent color']}
       >
         <HiOutlineMail size={30} />
-      </Link>
-
-      {table.Links.map(async (link) => {
-        if (link.Type === 'TickTok') {
-          const tickTok = await getTickTok(link.Link);
-          const htmlData = tickTok.html;
-          // return <div key={link.Title} dangerouslySetInnerHTML={{ __html: htmlData }} />;
-        } else {
-          return (
-            <StyledSocialLink
-              href={link.Link}
-              key={link.Title}
-              accentcolor={table.Colors[0]['Accent color']}
-            >
-              {link.Type === 'Instagram' && <AiOutlineInstagram size={30} />}
-              {link.Type === 'LinkedIn' && <AiOutlineLinkedin size={30} />}
-              {link.Type === 'YouTube' && <AiOutlineYoutube size={30} />}
-              {link.Type === 'TikTok' && <BsTiktok size={25} />}
-              {link.Type === 'Website' && <AiOutlineGlobal size={30} />}
-              {link.Title}
-            </StyledSocialLink>
-          );
-        }
-      })}
+      </MailLink>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          rowGap: '1rem',
+          marginBottom: '5rem',
+        }}
+      >
+        {table.Links.map(async (link) => {
+          if (link.Type === 'TikTok') {
+            const tickTok = await getTickTok(link.Link);
+            const htmlData = tickTok.html as string;
+            // console.log('htmlData', htmlData);
+            return (
+              <TickTokButton
+                link={link}
+                key={link.Title}
+                html={htmlData}
+                color={table.Colors[0]['Accent color']}
+              />
+            );
+          } else {
+            return (
+              <StyledSocialLink
+                target="_blank"
+                href={link.Link}
+                key={link.Title}
+                accentcolor={table.Colors[0]['Accent color']}
+              >
+                {link.Type === 'Instagram' && <AiOutlineInstagram size={30} />}
+                {link.Type === 'LinkedIn' && <AiOutlineLinkedin size={30} />}
+                {link.Type === 'YouTube' && <AiOutlineYoutube size={30} />}
+                {link.Type === 'Website' && <AiOutlineGlobal size={30} />}
+                {link.Type === 'SnapChat' && <FaSnapchat size={30} />}
+                {link.Title}
+              </StyledSocialLink>
+            );
+          }
+        })}
+      </div>
+      {table.Layout[0]['Display credentials'] == 'Yes' && (
+        <Link
+          href="https://github.com/makskornakov"
+          target="_blank"
+          rel="noopener"
+          style={{
+            fontFamily: table.Fonts[0]['Body name'],
+          }}
+        >
+          {/* copyright sign */}
+          &copy; {new Date().getFullYear()}{' '}
+          <span
+            style={{
+              color: table.Colors[0]['Accent color'],
+            }}
+          >
+            Max
+          </span>
+        </Link>
+      )}
     </main>
   );
 }
