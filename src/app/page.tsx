@@ -26,10 +26,13 @@ export const generateMetadata = async (): Promise<Metadata> => {
     return { title: 'Page not found' };
   }
 
-  const { Title, Description } = table.Global[0];
+  const { Title, Description, Favicon } = table.Global[0];
   return {
     title: Title,
     description: Description,
+    icons: {
+      icon: Favicon,
+    },
   };
 };
 export default async function Home() {
@@ -50,6 +53,7 @@ export default async function Home() {
         background: table.Colors[0]['Background'],
       }}
     >
+      <link rel="icon" href={table.Global[0].Favicon} />
       <link rel="stylesheet" href={table.Fonts[0]['Heading url']} />
       <link rel="stylesheet" href={table.Fonts[0]['Body url']} />
 
