@@ -1,6 +1,6 @@
 import { css } from '@linaria/core';
 
-import { reset } from './utils/reset';
+import { reset } from '../utils/reset';
 
 export const globals = css`
   :global() {

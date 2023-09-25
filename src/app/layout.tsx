@@ -1,4 +1,4 @@
-import './globals.linaria.global';
+import '~/styles/globals.linaria.global';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
